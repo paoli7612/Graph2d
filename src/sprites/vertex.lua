@@ -7,7 +7,7 @@ function Vertex(name)
     local _draw = vertex.draw
     function vertex.draw()
         _draw()
-        love.graphics.setColor(0, 1, 0)
+        love.graphics.setColor(0, 0, 0, 1)
         love.graphics.print(vertex.name, vertex.x, vertex.y)
     end
 
