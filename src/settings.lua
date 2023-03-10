@@ -2,7 +2,7 @@ local settings = {
     TITLE = 'GraphLove2d',
     WIDTH = 700,
     HEIGHT = 500,
-    MARGIN = 0,
+    MARGIN = 100,
     FLAGS = {
         resizable = true,
         vsync = 0,
@@ -11,7 +11,9 @@ local settings = {
     },
     BGCOLOR = {1, 1, 1, 1},
     FONT_SIZE = 20,
-    VERTEX = {}
+    VERTEX = {
+        RADIUS = 40
+    }
 }
 
 function settings.init()

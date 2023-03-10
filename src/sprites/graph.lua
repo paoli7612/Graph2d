@@ -9,8 +9,8 @@ function Graph()
 
     function graph.resize()
         width, height, flags = love.window.getMode( )
-        for i, vertex in ipairs(graph.vv) do
-            vertex.resize(width, height) 
+        for i, v in ipairs(graph.vv) do
+            v.resize(width, height)
         end
     end
 
@@ -23,25 +23,27 @@ function Graph()
         end
     end
 
-    function graph.add_vertex(name, level, x, y)
-        if level > graph.maxLevel then
-            graph.maxLevel = level + 1
-        end
-        local v = Vertex(graph, name, level, x, y)
+    function graph.add_vertex(name)
+        local v = Vertex(graph, name)
     end
 
-    function graph.add_vertexs(names, level)
-        local n = table.getn(names) + 1
-        step = love.graphics.getWidth( ) / n
-        for i, name in ipairs(names) do
-            x = i * step
-            graph.add_vertex(name, level, x)
+    function graph.add_vertexs(...)
+        for i, name in ipairs({...}) do
+            graph.add_vertex(name)
         end
     end
 
     function graph.get_vertex(name)
         for i, v in ipairs(graph.vv) do
             if v.name == name then
+                return v
+            end
+        end
+    end
+
+    function graph.get_vertex_pos(x, y) 
+        for i, v in ipairs(graph.vv) do
+            if v.isPos(x, y) then
                 return v
             end
         end
