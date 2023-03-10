@@ -3,11 +3,7 @@ local Graph = require('sprites/graph')
 
 function love.load()
 
-    love.window.setMode(settings.WIDTH, settings.HEIGHT, settings.FLAGS)
-    love.window.setTitle(settings.TITLE)
-    love.graphics.setBackgroundColor(settings.BGCOLOR)
-    font = love.graphics.newFont(settings.FONT_SIZE)
-    love.graphics.setFont(font)
+    settings.init()
 
     graph = Graph()
     graph.add_vertex('A', 1)
