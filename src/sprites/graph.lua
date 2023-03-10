@@ -1,10 +1,11 @@
-local Vertex = require('sprites/vertex')
-local Arch = require('sprites/arch')
+local Vertex = require('sprites.vertex')
+local Arch = require('sprites.arch')
 
 function Graph()
     local graph = {}
     graph.vv = {}
     graph.aa = {}
+    graph.maxLevel = 2
 
     function graph.resize()
         width, height, flags = love.window.getMode( )
@@ -22,8 +23,20 @@ function Graph()
         end
     end
 
-    function graph.add_vertex(name, level)
-        local v = Vertex(graph, name, level)
+    function graph.add_vertex(name, level, x, y)
+        if level > graph.maxLevel then
+            graph.maxLevel = level + 1
+        end
+        local v = Vertex(graph, name, level, x, y)
+    end
+
+    function graph.add_vertexs(names, level)
+        local n = table.getn(names) + 1
+        step = love.graphics.getWidth( ) / n
+        for i, name in ipairs(names) do
+            x = i * step
+            graph.add_vertex(name, level, x)
+        end
     end
 
     function graph.get_vertex(name)

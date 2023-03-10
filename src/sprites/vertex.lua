@@ -6,8 +6,8 @@ function Vertex(graph, name, level, x, y)
     vertex.name = name
 
     function vertex.resize(width, height)
-        vertex.x = love.math.random(settings.MARGIN, width - settings.MARGIN)
-        vertex.y = love.math.random(height/settings.LEVEL * level, height/settings.LEVEL * level + settings.MARGIN)
+        vertex.x = x or love.math.random(settings.MARGIN, width - settings.MARGIN)
+        vertex.y = love.math.random(height/graph.maxLevel * level, height/graph.maxLevel * level + settings.MARGIN)
         vertex.r = settings.VERTEX.radius or 50
     end
 

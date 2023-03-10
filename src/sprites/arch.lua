@@ -1,5 +1,3 @@
-
-
 function Arch(graph, v1, v2)
     local arch = {}
     arch.A = graph.get_vertex(v1)
