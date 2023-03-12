@@ -22,6 +22,8 @@ function settings.init()
     love.graphics.setBackgroundColor(settings.BGCOLOR)
     font = love.graphics.newFont(settings.FONT_SIZE)
     love.graphics.setFont(font)
+    love.keyboard.setKeyRepeat(true)
+
 end
 
 return settings
