@@ -1,10 +1,20 @@
-function Arch(graph, v1, v2)
+function Arch(graph, A, B)
     local arch = {}
-    arch.A = graph.get_vertex(v1)
-    arch.B = graph.get_vertex(v2)
+
+    function arch.print()
+        print("ARCH", A.name, B.name)
+    end
 
     function arch.draw()
-        love.graphics.line( arch.A.x, arch.A.y, arch.B.x, arch.B.y )
+        love.graphics.line(A.x, A.y, B.x, B.y)
+    end
+
+    function arch.is_alive()
+        if graph.get_vertex_name(A.name) and graph.get_vertex_name(B.name) then
+            return true
+        else
+            return false
+        end
     end
 
     table.insert(graph.aa, arch)

@@ -3,6 +3,11 @@ local settings = require('settings')
 function Vertex(graph, name)
     local vertex = {}
     vertex.name = name
+    vertex.aa = {}
+
+    function vertex.print()
+        print("VERTEX", vertex.name)
+    end
 
     function vertex.resize(width, height)
         vertex.x = love.math.random(settings.MARGIN, width - settings.MARGIN)
