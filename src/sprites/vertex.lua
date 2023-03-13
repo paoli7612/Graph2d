@@ -19,7 +19,8 @@ function Vertex(graph, name)
         love.graphics.setColor(1/2, 1/2, 1/2)
         love.graphics.circle('line', vertex.x, vertex.y, vertex.r)
         love.graphics.setColor(0, 0, 0, 1)
-        love.graphics.print(vertex.name, vertex.x, vertex.y)
+        len = string.len(vertex.name)
+        love.graphics.print(vertex.name, vertex.x - len*5, vertex.y)
     end
 
     function getDistance(x1, y1, x2, y2)
