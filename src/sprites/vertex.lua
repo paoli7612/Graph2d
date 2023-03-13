@@ -35,6 +35,11 @@ function Vertex(graph, name)
         end
     end
 
+    function vertex.move(dx, dy)
+        vertex.x = vertex.x + dx
+        vertex.y = vertex.y + dy        
+    end
+
     vertex.resize(settings.WIDTH, settings.HEIGHT)
     table.insert(graph.vv, vertex)
     return vertex

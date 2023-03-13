@@ -1,19 +1,10 @@
-local utf8 = require("utf8")
-
-
 local settings = require('settings')
-local Graph = require('sprites.graph')
 local Mouse = require('mouse')
 
 function love.load()
     settings.init()
     graph = require('src.input.test1')
     mouse = Mouse(graph)
-end
-function love.textinput(t)
-    if mouse.selected then
-        mouse.selected.name = mouse.selected.name .. t
-    end
 end
 
 function love.draw()
@@ -29,15 +20,19 @@ function love.keypressed(key)
         graph.print()
     elseif key == 'f2' then
         graph.new_vertex()
-    elseif key == "backspace" and mouse.selected then
-        local byteoffset = utf8.offset(mouse.selected.name, -1)
-        if byteoffset then
-            mouse.selected.name = string.sub(mouse.selected.name, 1, byteoffset - 1)
-        end
+    elseif key == "backspace" then
+        mouse.backspace()
+    elseif key == "left" then
+        graph.move(-10, 0)
+    elseif key == "right" then
+        graph.move(10, 0)
+    elseif key == "up" then
+        graph.move(0, -10)
+    elseif key == "down" then
+        graph.move(0, 10)
     end
 end
 
--- MOUSE --
 function love.mousepressed(x, y, button, istouch)
     mouse.pressed(x, y, button)
 end

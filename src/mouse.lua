@@ -1,34 +1,44 @@
+local utf8 = require("utf8")
+local settings = require('src.settings')
+
+function love.textinput(t)
+    if mouse.selected then
+        mouse.selected.name = mouse.selected.name .. t
+    end
+end
+
 function Mouse(graph)
-    local mouse = {
-        selected = {}
-    }
+    local mouse = {}
 
     function mouse.draw()
         y = 0
-        if not next(mouse.selected) == nil  then
-            love.graphics.setColor( 1, 0, 0, 1 )
+        if mouse.selected then
+            love.graphics.setColor(1, 0, 0, 1)
             love.graphics.print("SELECTED: " .. mouse.selected.name, 10, 10, 0, 2, 2)
-            love.graphics.circle('line', mouse.selected.x, mouse.selected.y, 40, 5)
+            love.graphics.circle('line', mouse.selected.x, mouse.selected.y, settings.VERTEX.RADIUS, 5)
             y = 70
         end
         if mouse.arch then
-            love.graphics.setColor( 0, 0, 1, 1 )
+            love.graphics.setColor(0, 0, 1, 1)
             love.graphics.print("START ARCH: " .. mouse.arch.name, 10, y, 0, 2, 2)
-            love.graphics.circle('line', mouse.arch.x, mouse.arch.y, 40, 8)
+            love.graphics.circle('line', mouse.arch.x, mouse.arch.y, settings.VERTEX.RADIUS, 8)
+        end
+    end
+
+    function mouse.backspace()
+        if mouse.selected then
+            local byteoffset = utf8.offset(mouse.selected.name, -1)
+            if byteoffset then
+                mouse.selected.name = string.sub(mouse.selected.name, 1, byteoffset - 1)
+            end
         end
     end
 
     function left(vertex) -- MOVE VERTEX
-        if love.keyboard.isDown('lctrl') then
-            table.insert(mouse.selected, vertex)
-        elseif next(mouse.selected) == nil then -- if a vertex is selected
-            mouse.selected = {} -- deselect the vertex
+        if mouse.selected == nil then -- if a vertex is selected
+            mouse.selected = vertex -- select the vertex
         else
-            table.insert(mouse.selected, vertex)
-            -- mouse.selected = vertex -- select the vertex
-        end
-        for i, v in ipairs(mouse.selected) do
-            print(i, v)
+            mouse.selected = nil -- deselect the vertex
         end
     end
 
@@ -57,15 +67,15 @@ function Mouse(graph)
                 middle(index)
             end
         else
-            mouse.selected = {}
+            mouse.selected = nil
             mouse.arch = nil
         end
     end
 
     function mouse.move(x, y, dx, dy)
-        for i, v in ipairs(mouse.selected) do
-            v.x = v.x + dx
-            v.y = v.y + dy
+        if mouse.selected then
+            mouse.selected.x = mouse.selected.x + dx
+            mouse.selected.y = mouse.selected.y + dy
         end
     end
 

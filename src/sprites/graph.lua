@@ -9,11 +9,17 @@ function Graph()
     function graph.alive()
         -- Scorri tutti gli archi
         for i, v in ipairs(graph.aa) do
-            if not v.is_alive() then
-                table.remove(graph.aa, i)
-                graph.alive()
+            if not v.is_alive() then -- Se trovo un arco che non è "vivo"
+                table.remove(graph.aa, i) -- lo tolgo
+                graph.alive() -- riparto
                 return
             end
+        end
+    end
+
+    function graph.move(dx, dy)
+        for i, v in ipairs(graph.vv) do
+            v.move(dx, dy)
         end
     end
 
