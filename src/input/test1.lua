@@ -1,4 +1,4 @@
-local graph = require('sprites.graph')
+local graph = require('graph')
 
 graph = Graph()
 

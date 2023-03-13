@@ -63,7 +63,7 @@ function Graph()
     end
 
     function graph.add_vertex(name)
-        Vertex(graph, name)
+        return Vertex(graph, name)
     end
 
     function graph.add_vertexs(...)
@@ -88,18 +88,8 @@ function Graph()
         end
     end
 
-    function createUUID()
-        local uuid = ""
-        local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        for i = 1, 4 do
-            local l = math.random(1, #chars)
-            uuid = uuid .. string.sub(chars, l, l)
-        end
-        return uuid
-    end
-
     function graph.new_vertex()
-        graph.add_vertex(createUUID())
+        return graph.add_vertex()
     end
 
     return graph

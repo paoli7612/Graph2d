@@ -3,7 +3,9 @@ local settings = require('src.settings')
 
 function love.textinput(t)
     if mouse.selected then
-        mouse.selected.name = mouse.selected.name .. t
+        if string.len(mouse.selected.name) < 64 then
+            mouse.selected.name = mouse.selected.name .. t
+        end
     end
 end
 

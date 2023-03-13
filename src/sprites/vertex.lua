@@ -2,7 +2,7 @@ local settings = require('settings')
 
 function Vertex(graph, name)
     local vertex = {}
-    vertex.name = name
+    vertex.name = name or ""
     vertex.aa = {}
 
     function vertex.print()
