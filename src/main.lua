@@ -22,10 +22,13 @@ function love.draw()
 end
 
 function love.keypressed(key)
+    print(key)
     if key == 'escape' then
         love.event.quit()
-    elseif key == 'q' then
+    elseif key == 'f1' then
         graph.print()
+    elseif key == 'f2' then
+        graph.new_vertex()
     elseif key == "backspace" and mouse.selected then
         local byteoffset = utf8.offset(mouse.selected.name, -1)
         if byteoffset then
@@ -40,5 +43,5 @@ function love.mousepressed(x, y, button, istouch)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
-    mouse.move(x, y)
+    mouse.move(x, y, dx, dy)
 end

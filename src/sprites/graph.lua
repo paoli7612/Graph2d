@@ -82,6 +82,20 @@ function Graph()
         end
     end
 
+    function createUUID()
+        local uuid = ""
+        local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        for i = 1, 4 do
+            local l = math.random(1, #chars)
+            uuid = uuid .. string.sub(chars, l, l)
+        end
+        return uuid
+    end
+
+    function graph.new_vertex()
+        graph.add_vertex(createUUID())
+    end
+
     return graph
 end
 

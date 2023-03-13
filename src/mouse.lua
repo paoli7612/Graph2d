@@ -1,9 +1,11 @@
 function Mouse(graph)
-    local mouse = {}
+    local mouse = {
+        selected = {}
+    }
 
     function mouse.draw()
         y = 0
-        if mouse.selected then
+        if not next(mouse.selected) == nil  then
             love.graphics.setColor( 1, 0, 0, 1 )
             love.graphics.print("SELECTED: " .. mouse.selected.name, 10, 10, 0, 2, 2)
             love.graphics.circle('line', mouse.selected.x, mouse.selected.y, 40, 5)
@@ -17,10 +19,16 @@ function Mouse(graph)
     end
 
     function left(vertex) -- MOVE VERTEX
-        if mouse.selected then -- if a vertex is selected
-            mouse.selected = nil -- deselect the vertex
+        if love.keyboard.isDown('lctrl') then
+            table.insert(mouse.selected, vertex)
+        elseif next(mouse.selected) == nil then -- if a vertex is selected
+            mouse.selected = {} -- deselect the vertex
         else
-            mouse.selected = vertex -- select the vertex
+            table.insert(mouse.selected, vertex)
+            -- mouse.selected = vertex -- select the vertex
+        end
+        for i, v in ipairs(mouse.selected) do
+            print(i, v)
         end
     end
 
@@ -49,15 +57,15 @@ function Mouse(graph)
                 middle(index)
             end
         else
-            mouse.selected = nil
+            mouse.selected = {}
             mouse.arch = nil
         end
     end
 
-    function mouse.move(x, y)
-        if mouse.selected then
-            mouse.selected.x = x
-            mouse.selected.y = y
+    function mouse.move(x, y, dx, dy)
+        for i, v in ipairs(mouse.selected) do
+            v.x = v.x + dx
+            v.y = v.y + dy
         end
     end
 
