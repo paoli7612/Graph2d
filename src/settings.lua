@@ -13,7 +13,11 @@ local settings = {
     FONT_SIZE = 20,
     VERTEX = {
         RADIUS = 40
+    },
+    ARCH = {
+        DIMENSION = 20
     }
+
 }
 
 function settings.init()
